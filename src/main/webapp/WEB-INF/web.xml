@@ -4,12 +4,22 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
     <servlet>
-        <servlet-name>TestServlet</servlet-name>
-        <servlet-class>TestServlet</servlet-class>
+        <servlet-name>controller-servlet</servlet-name>
+        <servlet-class>Controller.Controller</servlet-class>
+
+        <init-param>
+            <param-name>jdbcDriverName</param-name>
+            <param-value>com.mysql.cj.jdbc.Driver</param-value>
+        </init-param>
+
+        <init-param>
+            <param-name>jdbcURL</param-name>
+            <param-value>jdbc:mysql://localhost:3306/blog?serverTimezone=UTC</param-value>
+        </init-param>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>TestServlet</servlet-name>
-        <url-pattern>/servlet</url-pattern>
+        <servlet-name>controller-servlet</servlet-name>
+        <url-pattern>*.do</url-pattern>
     </servlet-mapping>
 </web-app>
