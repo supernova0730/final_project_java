@@ -1,4 +1,4 @@
-package DataBeans;
+package DataBean;
 
 import org.genericdao.PrimaryKey;
 
