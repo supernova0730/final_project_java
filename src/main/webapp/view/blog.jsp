@@ -1,4 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -39,174 +41,38 @@
                 <div class="col-lg-8">
                     <div class="all-blog-posts">
                         <div class="row">
-                            <div class="col-lg-6">
-                                <div class="blog-post">
-                                    <div class="blog-thumb">
-                                        <img src="${ pageContext.request.contextPath }/view/assets/images/blog-thumb-01.jpg" alt="">
-                                    </div>
-                                    <div class="down-content">
-                                        <span>Lifestyle</span>
-                                        <a href="post-details.html"><h4>Donec tincidunt leo</h4></a>
-                                        <ul class="post-info">
-                                            <li><a href="#">Admin</a></li>
-                                            <li><a href="#">May 31, 2020</a></li>
-                                            <li><a href="#">12 Comments</a></li>
-                                        </ul>
-                                        <p>Nullam nibh mi, tincidunt sed sapien ut, rutrum hendrerit velit. Integer auctor a mauris sit amet eleifend.</p>
-                                        <div class="post-options">
-                                            <div class="row">
-                                                <div class="col-lg-12">
-                                                    <ul class="post-tags">
-                                                        <li><i class="fa fa-tags"></i></li>
-                                                        <li><a href="#">Best Templates</a>,</li>
-                                                        <li><a href="#">TemplateMo</a></li>
-                                                    </ul>
+                            <c:forEach var="article" items="${ requestScope.articles }">
+                                <div class="col-lg-6">
+                                    <div class="blog-post">
+                                        <div class="blog-thumb">
+                                            <img src="${ pageContext.request.contextPath }/images/${ article.articleBean.image }" alt="">
+                                        </div>
+                                        <div class="down-content">
+                                            <span>${ article.categoryName }</span>
+                                            <a href="detail.do?id=${ article.articleBean.id }"><h4>${ article.articleBean.title }</h4></a>
+                                            <ul class="post-info">
+                                                <li>
+                                                    <fmt:setLocale value="en_US"/>
+                                                    <a href="#">
+                                                        <fmt:formatDate pattern="MMMM d, y" value="${ article.articleBean.dateCreated }"/>
+                                                    </a>
+                                                </li>
+                                                <li><a href="#">${ article.numberOfComments } comments</a></li>
+                                            </ul>
+                                            <p>${ article.articleBean.minContent }</p>
+                                            <div class="post-options">
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <ul class="post-tags">
+                                                            <li><i class="fa fa-tags"></i></li>
+                                                        </ul>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="blog-post">
-                                    <div class="blog-thumb">
-                                        <img src="${ pageContext.request.contextPath }/view/assets/images/blog-thumb-02.jpg" alt="">
-                                    </div>
-                                    <div class="down-content">
-                                        <span>Lifestyle</span>
-                                        <a href="post-details.html"><h4>Suspendisse et metus</h4></a>
-                                        <ul class="post-info">
-                                            <li><a href="#">Admin</a></li>
-                                            <li><a href="#">May 22, 2020</a></li>
-                                            <li><a href="#">26 Comments</a></li>
-                                        </ul>
-                                        <p>Nullam nibh mi, tincidunt sed sapien ut, rutrum hendrerit velit. Integer auctor a mauris sit amet eleifend.</p>
-                                        <div class="post-options">
-                                            <div class="row">
-                                                <div class="col-lg-12">
-                                                    <ul class="post-tags">
-                                                        <li><i class="fa fa-tags"></i></li>
-                                                        <li><a href="#">Best Templates</a>,</li>
-                                                        <li><a href="#">TemplateMo</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="blog-post">
-                                    <div class="blog-thumb">
-                                        <img src="${ pageContext.request.contextPath }/view/assets/images/blog-thumb-03.jpg" alt="">
-                                    </div>
-                                    <div class="down-content">
-                                        <span>Lifestyle</span>
-                                        <a href="post-details.html"><h4>Donec tincidunt leo</h4></a>
-                                        <ul class="post-info">
-                                            <li><a href="#">Admin</a></li>
-                                            <li><a href="#">May 18, 2020</a></li>
-                                            <li><a href="#">42 Comments</a></li>
-                                        </ul>
-                                        <p>Nullam nibh mi, tincidunt sed sapien ut, rutrum hendrerit velit. Integer auctor a mauris sit amet eleifend.</p>
-                                        <div class="post-options">
-                                            <div class="row">
-                                                <div class="col-lg-12">
-                                                    <ul class="post-tags">
-                                                        <li><i class="fa fa-tags"></i></li>
-                                                        <li><a href="#">Best Templates</a>,</li>
-                                                        <li><a href="#">TemplateMo</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="blog-post">
-                                    <div class="blog-thumb">
-                                        <img src="${ pageContext.request.contextPath }/view/assets/images/blog-thumb-04.jpg" alt="">
-                                    </div>
-                                    <div class="down-content">
-                                        <span>Lifestyle</span>
-                                        <a href="post-details.html"><h4>Mauris ac dolor ornare</h4></a>
-                                        <ul class="post-info">
-                                            <li><a href="#">Admin</a></li>
-                                            <li><a href="#">May 16, 2020</a></li>
-                                            <li><a href="#">28 Comments</a></li>
-                                        </ul>
-                                        <p>Nullam nibh mi, tincidunt sed sapien ut, rutrum hendrerit velit. Integer auctor a mauris sit amet eleifend.</p>
-                                        <div class="post-options">
-                                            <div class="row">
-                                                <div class="col-lg-12">
-                                                    <ul class="post-tags">
-                                                        <li><i class="fa fa-tags"></i></li>
-                                                        <li><a href="#">Best Templates</a>,</li>
-                                                        <li><a href="#">TemplateMo</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="blog-post">
-                                    <div class="blog-thumb">
-                                        <img src="${ pageContext.request.contextPath }/view/assets/images/blog-thumb-05.jpg" alt="">
-                                    </div>
-                                    <div class="down-content">
-                                        <span>Lifestyle</span>
-                                        <a href="post-details.html"><h4>Donec tincidunt leo</h4></a>
-                                        <ul class="post-info">
-                                            <li><a href="#">Admin</a></li>
-                                            <li><a href="#">May 12, 2020</a></li>
-                                            <li><a href="#">16 Comments</a></li>
-                                        </ul>
-                                        <p>Nullam nibh mi, tincidunt sed sapien ut, rutrum hendrerit velit. Integer auctor a mauris sit amet eleifend.</p>
-                                        <div class="post-options">
-                                            <div class="row">
-                                                <div class="col-lg-12">
-                                                    <ul class="post-tags">
-                                                        <li><i class="fa fa-tags"></i></li>
-                                                        <li><a href="#">Best Templates</a>,</li>
-                                                        <li><a href="#">TemplateMo</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="blog-post">
-                                    <div class="blog-thumb">
-                                        <img src="${ pageContext.request.contextPath }/view/assets/images/blog-thumb-06.jpg" alt="">
-                                    </div>
-                                    <div class="down-content">
-                                        <span>Lifestyle</span>
-                                        <a href="post-details.html"><h4>Mauris ac dolor ornare</h4></a>
-                                        <ul class="post-info">
-                                            <li><a href="#">Admin</a></li>
-                                            <li><a href="#">May 10, 2020</a></li>
-                                            <li><a href="#">3 Comments</a></li>
-                                        </ul>
-                                        <p>Nullam nibh mi, tincidunt sed sapien ut, rutrum hendrerit velit. Integer auctor a mauris sit amet eleifend.</p>
-                                        <div class="post-options">
-                                            <div class="row">
-                                                <div class="col-lg-12">
-                                                    <ul class="post-tags">
-                                                        <li><i class="fa fa-tags"></i></li>
-                                                        <li><a href="#">Best Templates</a>,</li>
-                                                        <li><a href="#">TemplateMo</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            </c:forEach>
                             <div class="col-lg-12">
                                 <ul class="page-numbers">
                                     <li class="active"><a href="#">1</a></li>

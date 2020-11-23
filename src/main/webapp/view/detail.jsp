@@ -47,17 +47,16 @@
                                         <img src="${ pageContext.request.contextPath }/images/${ requestScope.article.image }" alt="">
                                     </div>
                                     <div class="down-content">
-                                        <span>Lifestyle</span>
+                                        <span>${ requestScope.category.title }</span>
                                         <a href="post-details.html"><h4>${ requestScope.article.title }</h4></a>
                                         <ul class="post-info">
-                                            <li><a href="#">Admin</a></li>
                                             <fmt:setLocale value="en_US"/>
                                             <li>
                                                 <a href="#">
-                                                    <fmt:formatDate pattern="MMMM d, y h:m a" value="${ requestScope.article.dateCreated }"/>
+                                                    <fmt:formatDate pattern="MMMM d, y" value="${ requestScope.article.dateCreated }"/>
                                                 </a>
                                             </li>
-                                            <li><a href="#">10 Comments</a></li>
+                                            <li><a href="#">${ requestScope.comments.size() } Comments</a></li>
                                         </ul>
                                         <p>${ requestScope.article.content }</p>
                                         <div class="post-options">
@@ -65,8 +64,6 @@
                                                 <div class="col-6">
                                                     <ul class="post-tags">
                                                         <li><i class="fa fa-tags"></i></li>
-                                                        <li><a href="#">Best Templates</a>,</li>
-                                                        <li><a href="#">TemplateMo</a></li>
                                                     </ul>
                                                 </div>
                                                 <div class="col-6">
@@ -84,46 +81,26 @@
                             <div class="col-lg-12">
                                 <div class="sidebar-item comments">
                                     <div class="sidebar-heading">
-                                        <h2>4 comments</h2>
+                                        <h2>${ requestScope.comments.size() } comments</h2>
                                     </div>
                                     <div class="content">
                                         <ul>
-                                            <li>
-                                                <div class="author-thumb">
-                                                    <img src="${ pageContext.request.contextPath }/view/assets/images/comment-author-01.jpg" alt="">
-                                                </div>
-                                                <div class="right-content">
-                                                    <h4>Charles Kate<span>May 16, 2020</span></h4>
-                                                    <p>Fusce ornare mollis eros. Duis et diam vitae justo fringilla condimentum eu quis leo. Vestibulum id turpis porttitor sapien facilisis scelerisque. Curabitur a nisl eu lacus convallis eleifend posuere id tellus.</p>
-                                                </div>
-                                            </li>
-                                            <li class="replied">
-                                                <div class="author-thumb">
-                                                    <img src="${ pageContext.request.contextPath }/view/assets/images/comment-author-02.jpg" alt="">
-                                                </div>
-                                                <div class="right-content">
-                                                    <h4>Thirteen Man<span>May 20, 2020</span></h4>
-                                                    <p>In porta urna sed venenatis sollicitudin. Praesent urna sem, pulvinar vel mattis eget.</p>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="author-thumb">
-                                                    <img src="${ pageContext.request.contextPath }/view/assets/images/comment-author-03.jpg" alt="">
-                                                </div>
-                                                <div class="right-content">
-                                                    <h4>Belisimo Mama<span>May 16, 2020</span></h4>
-                                                    <p>Nullam nec pharetra nibh. Cras tortor nulla, faucibus id tincidunt in, ultrices eget ligula. Sed vitae suscipit ligula. Vestibulum id turpis volutpat, lobortis turpis ac, molestie nibh.</p>
-                                                </div>
-                                            </li>
-                                            <li class="replied">
-                                                <div class="author-thumb">
-                                                    <img src="${ pageContext.request.contextPath }/view/assets/images/comment-author-02.jpg" alt="">
-                                                </div>
-                                                <div class="right-content">
-                                                    <h4>Thirteen Man<span>May 22, 2020</span></h4>
-                                                    <p>Mauris sit amet justo vulputate, cursus massa congue, vestibulum odio. Aenean elit nunc, gravida in erat sit amet, feugiat viverra leo.</p>
-                                                </div>
-                                            </li>
+                                            <c:forEach var="comment" items="${ requestScope.comments }" >
+                                                <li>
+                                                    <div class="author-thumb">
+                                                        <img src="${ pageContext.request.contextPath }/view/assets/images/man.png" alt="">
+                                                    </div>
+                                                    <div class="right-content">
+                                                        <fmt:setLocale value="en_US"/>
+                                                        <h4>${ comment.authorName }
+                                                            <span>
+                                                                <fmt:formatDate pattern="MMMM d, y" value="${ comment.dateCreated }"/>
+                                                            </span>
+                                                        </h4>
+                                                        <p>${ comment.content }</p>
+                                                    </div>
+                                                </li>
+                                            </c:forEach>
                                         </ul>
                                     </div>
                                 </div>
@@ -144,11 +121,6 @@
                                                 <div class="col-md-6 col-sm-12">
                                                     <fieldset>
                                                         <input name="email" type="text" id="email" placeholder="Your email" required="">
-                                                    </fieldset>
-                                                </div>
-                                                <div class="col-md-12 col-sm-12">
-                                                    <fieldset>
-                                                        <input name="subject" type="text" id="subject" placeholder="Subject">
                                                     </fieldset>
                                                 </div>
                                                 <div class="col-lg-12">

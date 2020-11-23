@@ -1,5 +1,6 @@
 package DAO;
 
+import DataBean.ArticleBean;
 import DataBean.CategoryBean;
 
 import java.sql.*;
@@ -15,6 +16,39 @@ public class CategoryDAO extends DAO {
         this.tableName = tableName;
     }
 
+    public CategoryBean read(int id) {
+        final String QUERY = String.format("SELECT * FROM %s WHERE id = ?", tableName);
+
+        CategoryBean category = null;
+
+        Connection connection = null;
+
+        try {
+            connection = getConnection();
+        } catch (DAOException ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(QUERY);
+            preparedStatement.setInt(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                category = createCategoryBean(resultSet);
+            }
+
+            preparedStatement.close();
+            resultSet.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        releaseConnection(connection);
+
+        return category;
+    }
+
     public List<CategoryBean> getAllCategories() {
         final String QUERY = String.format("SELECT * FROM %s", tableName);
 
@@ -24,30 +58,44 @@ public class CategoryDAO extends DAO {
 
         try {
             connection = getConnection();
-        } catch (DAOException e) {
-            e.printStackTrace();
+        } catch (DAOException ex) {
+            ex.printStackTrace();
         }
+
 
         try {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(QUERY);
 
             while (resultSet.next()) {
-                int categoryId = resultSet.getInt("id");
-                String categoryTitle = resultSet.getString("title");
-
-                CategoryBean categoryBean = new CategoryBean();
-                categoryBean.setId(categoryId);
-                categoryBean.setTitle(categoryTitle);
-
+                CategoryBean categoryBean = createCategoryBean(resultSet);
                 categories.add(categoryBean);
             }
 
-        } catch (SQLException e) {
-            e.printStackTrace();
+            statement.close();
+            resultSet.close();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
         }
 
+        releaseConnection(connection);
+
         return categories;
+    }
+
+    private CategoryBean createCategoryBean(ResultSet resultSet) {
+        CategoryBean categoryBean = new CategoryBean();
+
+        try {
+            categoryBean.setId(resultSet.getInt("id"));
+            categoryBean.setTitle(resultSet.getString("title"));
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            categoryBean = null;
+        }
+
+        return categoryBean;
     }
 
 }

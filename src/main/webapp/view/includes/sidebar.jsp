@@ -1,9 +1,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="DAO.Model" %>
 <%@ page import="DAO.CategoryDAO" %>
 <%@ page import="DataBean.CategoryBean" %>
-<%@ page import="org.genericdao.RollbackException" %>
 <%@ page import="java.util.List" %>
+<%@ page import="DataBean.ArticleBean" %>
+<%@ page import="DAO.ArticleDAO" %>
 <div class="sidebar">
     <div class="row">
         <div class="col-lg-12">
@@ -16,22 +18,26 @@
         <div class="col-lg-12">
             <div class="sidebar-item recent-posts">
                 <div class="sidebar-heading">
-                    <h2>Recent Posts</h2>
+                    <h2>Last Posts</h2>
                 </div>
                 <div class="content">
                     <ul>
-                        <li><a href="post-details.html">
-                            <h5>Vestibulum id turpis porttitor sapien facilisis scelerisque</h5>
-                            <span>May 31, 2020</span>
-                        </a></li>
-                        <li><a href="post-details.html">
-                            <h5>Suspendisse et metus nec libero ultrices varius eget in risus</h5>
-                            <span>May 28, 2020</span>
-                        </a></li>
-                        <li><a href="post-details.html">
-                            <h5>Swag hella echo park leggings, shaman cornhole ethical coloring</h5>
-                            <span>May 14, 2020</span>
-                        </a></li>
+                        <%
+                            ServletContext context = request.getServletContext();
+                            Model model = (Model) context.getAttribute("model");
+                            ArticleDAO articleDAO = model.getArticleDAO();
+                            List<ArticleBean> lastArticles = articleDAO.getLastArticles(3);
+                        %>
+
+                        <% for (ArticleBean article: lastArticles) { %>
+                            <li>
+                                <a href="detail.do?id=<%= article.getId() %>">
+                                <h5><%= article.getTitle() %></h5>
+                                <fmt:setLocale value="en_US"/>
+                                <span><fmt:formatDate pattern="MMMM d, y" value="<%= article.getDateCreated() %>"/></span>
+                                </a>
+                            </li>
+                        <% } %>
                     </ul>
                 </div>
             </div>
@@ -44,8 +50,6 @@
                 <div class="content">
                     <ul>
                         <%
-                            ServletContext context = request.getServletContext();
-                            Model model = (Model) context.getAttribute("model");
                             CategoryDAO categoryDAO = model.getCategoryDAO();
                             List<CategoryBean> categories = categoryDAO.getAllCategories();
                         %>
