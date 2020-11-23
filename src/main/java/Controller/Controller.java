@@ -19,16 +19,7 @@ public class Controller extends HttpServlet {
     public void init() throws ServletException {
         Model model = new Model(getServletConfig());
 
-//        Action.add(new RegisterAction(model));
-//        Action.add(new LoginAction(model));
-//        Action.add(new VisitAction(model));
-//        Action.add(new Blog(model));
-//        Action.add(new LogoutAction());
-//        Action.add(new PostAction(model));
-//        Action.add(new DeletePostAction(model));
-//        Action.add(new CommentAction(model));
-//        Action.add(new DeleteHomeCommentAction(model));
-//        Action.add(new DeleteVisitCommentAction(model));
+        Action.add(new TestAction(model));
     }
 
     @Override
