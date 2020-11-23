@@ -13,7 +13,7 @@ public class ArticleBean {
     private String content;
     private Date dateCreated;
     private int categoryId;
-    private byte[] image;
+    private String image;
 
     public int getId() {return id;}
     public String getTitle() {return title;}
@@ -21,7 +21,7 @@ public class ArticleBean {
     public String getContent() {return content;}
     public Date getDateCreated() {return dateCreated;}
     public int getCategoryId() {return categoryId;}
-    public byte[] getImage() {return image;}
+    public String getImage() {return image;}
 
     public void setId(int id) {this.id = id;}
     public void setTitle(String title) {this.title = title;}
@@ -34,5 +34,5 @@ public class ArticleBean {
 
     public void setDateCreated(Date dateCreated) {this.dateCreated = dateCreated;}
     public void setCategoryId(int categoryId) {this.categoryId = categoryId;}
-    public void setImage(byte[] image) {this.image = image;}
+    public void setImage(String image) {this.image = image;}
 }

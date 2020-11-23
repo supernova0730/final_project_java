@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -18,12 +19,11 @@
 <body>
     <jsp:include page="includes/header.jsp" />
 
-
     <div class="main-banner header-text">
         <div class="container-fluid">
             <div class="owl-banner owl-carousel">
                 <div class="item">
-                    <img src="assets/images/banner-item-01.jpg" alt="">
+                    <img src="${ pageContext.request.contextPath }/view/assets/images/banner-item-01.jpg" alt="">
                     <div class="item-content">
                         <div class="main-content">
                             <div class="meta-category">
@@ -39,7 +39,7 @@
                     </div>
                 </div>
                 <div class="item">
-                    <img src="assets/images/banner-item-02.jpg" alt="">
+                    <img src="${ pageContext.request.contextPath }/view/assets/images/banner-item-02.jpg" alt="">
                     <div class="item-content">
                         <div class="main-content">
                             <div class="meta-category">
@@ -55,7 +55,7 @@
                     </div>
                 </div>
                 <div class="item">
-                    <img src="assets/images/banner-item-03.jpg" alt="">
+                    <img src="${ pageContext.request.contextPath }/view/assets/images/banner-item-03.jpg" alt="">
                     <div class="item-content">
                         <div class="main-content">
                             <div class="meta-category">
@@ -71,7 +71,7 @@
                     </div>
                 </div>
                 <div class="item">
-                    <img src="assets/images/banner-item-04.jpg" alt="">
+                    <img src="${ pageContext.request.contextPath }/view/assets/images/banner-item-04.jpg" alt="">
                     <div class="item-content">
                         <div class="main-content">
                             <div class="meta-category">
@@ -87,7 +87,7 @@
                     </div>
                 </div>
                 <div class="item">
-                    <img src="assets/images/banner-item-05.jpg" alt="">
+                    <img src="${ pageContext.request.contextPath }/view/assets/images/banner-item-05.jpg" alt="">
                     <div class="item-content">
                         <div class="main-content">
                             <div class="meta-category">
@@ -103,7 +103,7 @@
                     </div>
                 </div>
                 <div class="item">
-                    <img src="assets/images/banner-item-06.jpg" alt="">
+                    <img src="${ pageContext.request.contextPath }/view/assets/images/banner-item-06.jpg" alt="">
                     <div class="item-content">
                         <div class="main-content">
                             <div class="meta-category">
@@ -132,7 +132,7 @@
                             <div class="col-lg-12">
                                 <div class="blog-post">
                                     <div class="blog-thumb">
-                                        <img src="assets/images/blog-post-01.jpg" alt="">
+                                        <img src="${ pageContext.request.contextPath }/view/assets/images/blog-post-01.jpg" alt="">
                                     </div>
                                     <div class="down-content">
                                         <span>Lifestyle</span>
@@ -167,7 +167,7 @@
                             <div class="col-lg-12">
                                 <div class="blog-post">
                                     <div class="blog-thumb">
-                                        <img src="assets/images/blog-post-02.jpg" alt="">
+                                        <img src="${ pageContext.request.contextPath }/view/assets/images/blog-post-02.jpg" alt="">
                                     </div>
                                     <div class="down-content">
                                         <span>Healthy</span>
@@ -202,7 +202,7 @@
                             <div class="col-lg-12">
                                 <div class="blog-post">
                                     <div class="blog-thumb">
-                                        <img src="assets/images/blog-post-03.jpg" alt="">
+                                        <img src="${ pageContext.request.contextPath }/view/assets/images/blog-post-03.jpg" alt="">
                                     </div>
                                     <div class="down-content">
                                         <span>Fashion</span>

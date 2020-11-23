@@ -1,3 +1,8 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="DAO.Model" %>
+<%@ page import="DAO.CategoryDAO" %>
+<%@ page import="DataBean.CategoryBean" %>
+<%@ page import="org.genericdao.RollbackException" %>
 <div class="sidebar">
     <div class="row">
         <div class="col-lg-12">
@@ -37,30 +42,16 @@
                 </div>
                 <div class="content">
                     <ul>
-                        <li><a href="#">- Nature Lifestyle</a></li>
-                        <li><a href="#">- Awesome Layouts</a></li>
-                        <li><a href="#">- Creative Ideas</a></li>
-                        <li><a href="#">- Responsive Templates</a></li>
-                        <li><a href="#">- HTML5 / CSS3 Templates</a></li>
-                        <li><a href="#">- Creative &amp; Unique</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-12">
-            <div class="sidebar-item tags">
-                <div class="sidebar-heading">
-                    <h2>Tag Clouds</h2>
-                </div>
-                <div class="content">
-                    <ul>
-                        <li><a href="#">Lifestyle</a></li>
-                        <li><a href="#">Creative</a></li>
-                        <li><a href="#">HTML5</a></li>
-                        <li><a href="#">Inspiration</a></li>
-                        <li><a href="#">Motivation</a></li>
-                        <li><a href="#">PSD</a></li>
-                        <li><a href="#">Responsive</a></li>
+                        <%
+                            ServletContext context = request.getServletContext();
+                            Model model = (Model) context.getAttribute("model");
+                            CategoryDAO categoryDAO = model.getCategoryDAO();
+                            CategoryBean[] categories = categoryDAO.getAllCategories();
+                        %>
+
+                        <% for (CategoryBean category: categories) { %>
+                            <li><a href="#">- <%= category.getTitle() %></a></li>
+                        <% } %>
                     </ul>
                 </div>
             </div>

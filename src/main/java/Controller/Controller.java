@@ -1,16 +1,15 @@
 package Controller;
 
 import DAO.Model;
-import org.genericdao.RollbackException;
 
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 
 public class Controller extends HttpServlet {
@@ -19,7 +18,14 @@ public class Controller extends HttpServlet {
     public void init() throws ServletException {
         Model model = new Model(getServletConfig());
 
-        Action.add(new TestAction(model));
+        ServletContext context = getServletContext();
+        context.setAttribute("model", model);
+
+        Action.add(new HomeAction(model));
+        Action.add(new BlogAction(model));
+        Action.add(new DetailAction(model));
+        Action.add(new AboutAction());
+        Action.add(new ContactAction());
     }
 
     @Override

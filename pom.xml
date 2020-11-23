@@ -47,6 +47,11 @@
             <scope>system</scope>
             <systemPath>C:/Users/kuany/IdeaProjects/blog/target/blog-1.0-SNAPSHOT/WEB-INF/lib/genericdao-3.0.2.jar</systemPath>
         </dependency>
+        <dependency>
+            <groupId>jstl</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
+        </dependency>
     </dependencies>
 
     <build>
