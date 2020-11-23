@@ -1,8 +1,5 @@
 package DataBean;
 
-import org.genericdao.PrimaryKey;
-
-@PrimaryKey("id")
 public class CategoryBean {
     private int id;
     private String title;

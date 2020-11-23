@@ -1,8 +1,5 @@
 package DAO;
 
-import org.genericdao.ConnectionPool;
-import org.genericdao.DAOException;
-
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 
@@ -12,19 +9,12 @@ public class Model {
     private CommentDAO commentDAO;
 
     public Model(ServletConfig config) throws ServletException {
-        try {
-            String jdbcDriver = config.getInitParameter("jdbcDriverName");
-            String jdbcURL = config.getInitParameter("jdbcURL");
+        String jdbcDriver = config.getInitParameter("jdbcDriverName");
+        String jdbcURL = config.getInitParameter("jdbcURL");
 
-            ConnectionPool connectionPool = new ConnectionPool(jdbcDriver, jdbcURL);
-
-            categoryDAO = new CategoryDAO(connectionPool, "category");
-            articleDAO = new ArticleDAO(connectionPool, "article");
-            commentDAO = new CommentDAO(connectionPool, "comment");
-
-        } catch (DAOException ex) {
-            throw new ServletException(ex);
-        }
+        categoryDAO = new CategoryDAO(jdbcDriver, jdbcURL, "category");
+        articleDAO = new ArticleDAO(jdbcDriver, jdbcURL, "article");
+        commentDAO = new CommentDAO(jdbcDriver, jdbcURL, "comment");
     }
 
     public CategoryDAO getCategoryDAO() {return categoryDAO;}

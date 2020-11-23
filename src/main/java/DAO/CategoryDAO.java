@@ -1,21 +1,53 @@
 package DAO;
 
 import DataBean.CategoryBean;
-import org.genericdao.ConnectionPool;
-import org.genericdao.DAOException;
-import org.genericdao.GenericDAO;
-import org.genericdao.RollbackException;
 
-public class CategoryDAO extends GenericDAO<CategoryBean> {
-    public CategoryDAO(ConnectionPool connectionPool, String tableName) throws DAOException {
-        super(CategoryBean.class, tableName, connectionPool);
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+
+public class CategoryDAO extends DAO {
+
+    private final String tableName;
+
+    public CategoryDAO(String jdbcDriver, String jdbcURL, String tableName) {
+        super(jdbcDriver, jdbcURL);
+        this.tableName = tableName;
     }
 
-    public CategoryBean[] getAllCategories() {
+    public List<CategoryBean> getAllCategories() {
+        final String QUERY = String.format("SELECT * FROM %s", tableName);
+
+        List<CategoryBean> categories = new ArrayList<>();
+
+        Connection connection = null;
+
         try {
-            return match();
-        } catch (RollbackException ex) {
-            return null;
+            connection = getConnection();
+        } catch (DAOException e) {
+            e.printStackTrace();
         }
+
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(QUERY);
+
+            while (resultSet.next()) {
+                int categoryId = resultSet.getInt("id");
+                String categoryTitle = resultSet.getString("title");
+
+                CategoryBean categoryBean = new CategoryBean();
+                categoryBean.setId(categoryId);
+                categoryBean.setTitle(categoryTitle);
+
+                categories.add(categoryBean);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return categories;
     }
+
 }

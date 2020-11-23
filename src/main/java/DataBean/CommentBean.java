@@ -1,11 +1,6 @@
 package DataBean;
-
-import org.genericdao.MaxSize;
-import org.genericdao.PrimaryKey;
-
 import java.util.Date;
 
-@PrimaryKey("id")
 public class CommentBean {
     private int id;
     private String authorName;
@@ -24,10 +19,7 @@ public class CommentBean {
     public void setId(int id) {this.id = id;}
     public void setAuthorName(String authorName) {this.authorName = authorName;}
     public void setEmail(String email) {this.email = email;}
-
-    @MaxSize(1023)
     public void setContent(String content) {this.content = content;}
-
     public void setDateCreated(Date dateCreated) {this.dateCreated = dateCreated;}
     public void setArticleId(int articleId) {this.articleId = articleId;}
 }

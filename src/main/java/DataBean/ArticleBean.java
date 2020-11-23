@@ -1,11 +1,7 @@
 package DataBean;
 
-import org.genericdao.MaxSize;
-import org.genericdao.PrimaryKey;
-
 import java.util.Date;
 
-@PrimaryKey("id")
 public class ArticleBean {
     private int id;
     private String title;
@@ -25,13 +21,8 @@ public class ArticleBean {
 
     public void setId(int id) {this.id = id;}
     public void setTitle(String title) {this.title = title;}
-
-    @MaxSize(1023)
     public void setMinContent(String minContent) {this.minContent = minContent;}
-
-    @MaxSize(1023)
     public void setContent(String content) {this.content = content;}
-
     public void setDateCreated(Date dateCreated) {this.dateCreated = dateCreated;}
     public void setCategoryId(int categoryId) {this.categoryId = categoryId;}
     public void setImage(String image) {this.image = image;}

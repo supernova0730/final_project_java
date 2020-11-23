@@ -3,6 +3,7 @@
 <%@ page import="DAO.CategoryDAO" %>
 <%@ page import="DataBean.CategoryBean" %>
 <%@ page import="org.genericdao.RollbackException" %>
+<%@ page import="java.util.List" %>
 <div class="sidebar">
     <div class="row">
         <div class="col-lg-12">
@@ -46,7 +47,7 @@
                             ServletContext context = request.getServletContext();
                             Model model = (Model) context.getAttribute("model");
                             CategoryDAO categoryDAO = model.getCategoryDAO();
-                            CategoryBean[] categories = categoryDAO.getAllCategories();
+                            List<CategoryBean> categories = categoryDAO.getAllCategories();
                         %>
 
                         <% for (CategoryBean category: categories) { %>

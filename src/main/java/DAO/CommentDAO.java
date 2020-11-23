@@ -1,12 +1,12 @@
 package DAO;
 
-import DataBean.CommentBean;
-import org.genericdao.ConnectionPool;
-import org.genericdao.DAOException;
-import org.genericdao.GenericDAO;
+public class CommentDAO extends DAO {
 
-public class CommentDAO extends GenericDAO<CommentBean> {
-    public CommentDAO(ConnectionPool connectionPool, String tableName) throws DAOException {
-        super(CommentBean.class, tableName, connectionPool);
+    private final String tableName;
+
+    public CommentDAO(String jdbcDriver, String jdbcURL, String tableName) {
+        super(jdbcDriver, jdbcURL);
+        this.tableName = tableName;
     }
+
 }

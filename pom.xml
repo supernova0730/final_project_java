@@ -41,13 +41,6 @@
             <version>8.0.21</version>
         </dependency>
         <dependency>
-            <groupId>sample</groupId>
-            <artifactId>com.sample</artifactId>
-            <version>3.0.2</version>
-            <scope>system</scope>
-            <systemPath>C:/Users/kuany/IdeaProjects/blog/target/blog-1.0-SNAPSHOT/WEB-INF/lib/genericdao-3.0.2.jar</systemPath>
-        </dependency>
-        <dependency>
             <groupId>jstl</groupId>
             <artifactId>jstl</artifactId>
             <version>1.2</version>
