@@ -44,7 +44,7 @@
                             <div class="col-lg-12">
                                 <div class="blog-post">
                                     <div class="blog-thumb">
-                                        <img src="${ pageContext.request.contextPath }/images/${ requestScope.article.image }" alt="">
+                                        <img src="${ pageContext.request.contextPath }/image/${ requestScope.article.image }" alt="">
                                     </div>
                                     <div class="down-content">
                                         <span>${ requestScope.category.title }</span>

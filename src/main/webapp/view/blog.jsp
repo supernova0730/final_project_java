@@ -45,7 +45,7 @@
                                 <div class="col-lg-6">
                                     <div class="blog-post">
                                         <div class="blog-thumb">
-                                            <img src="${ pageContext.request.contextPath }/images/${ article.articleBean.image }" alt="">
+                                            <img src="${ pageContext.request.contextPath }/image/${ article.articleBean.image }" alt="">
                                         </div>
                                         <div class="down-content">
                                             <span>${ article.categoryName }</span>

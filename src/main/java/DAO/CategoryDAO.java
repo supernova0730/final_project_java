@@ -16,6 +16,30 @@ public class CategoryDAO extends DAO {
         this.tableName = tableName;
     }
 
+    public void create(CategoryBean categoryBean) {
+        final String QUERY = String.format("INSERT INTO %s (title) VALUES(?)", tableName);
+
+        Connection connection = null;
+
+        try {
+            connection = getConnection();
+        } catch (DAOException ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(QUERY);
+            preparedStatement.setString(1, categoryBean.getTitle());
+            int count = preparedStatement.executeUpdate();
+
+            preparedStatement.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        releaseConnection(connection);
+    }
+
     public CategoryBean read(int id) {
         final String QUERY = String.format("SELECT * FROM %s WHERE id = ?", tableName);
 

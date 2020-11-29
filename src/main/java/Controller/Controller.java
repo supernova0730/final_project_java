@@ -1,5 +1,6 @@
 package Controller;
 
+import Controller.Admin.*;
 import DAO.Model;
 
 import java.io.IOException;
@@ -7,11 +8,12 @@ import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
+@MultipartConfig
 public class Controller extends HttpServlet {
 
     @Override
@@ -26,6 +28,12 @@ public class Controller extends HttpServlet {
         Action.add(new DetailAction(model));
         Action.add(new AboutAction());
         Action.add(new ContactAction());
+
+        Action.add(new AdminLoginAction());
+        Action.add(new AdminListAction(model));
+        Action.add(new AdminAddAction());
+        Action.add(new CategoryAddAction(model));
+        Action.add(new ArticleAddAction(model));
     }
 
     @Override

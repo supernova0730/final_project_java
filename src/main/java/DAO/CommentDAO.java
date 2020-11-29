@@ -2,10 +2,7 @@ package DAO;
 
 import DataBean.CommentBean;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +13,39 @@ public class CommentDAO extends DAO {
     public CommentDAO(String jdbcDriver, String jdbcURL, String tableName) {
         super(jdbcDriver, jdbcURL);
         this.tableName = tableName;
+    }
+
+    public List<CommentBean> getAllComments() {
+        final String QUERY = String.format("SELECT * FROM %s", tableName);
+
+        List<CommentBean> comments = new ArrayList<>();
+
+        Connection connection = null;
+
+        try {
+            connection = getConnection();
+        } catch (DAOException ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(QUERY);
+
+            while (resultSet.next()) {
+                CommentBean comment = createCommentBean(resultSet);
+                comments.add(comment);
+            }
+
+            statement.close();
+            resultSet.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        releaseConnection(connection);
+
+        return comments;
     }
 
     public List<CommentBean> getArticleComments(int articleId) {

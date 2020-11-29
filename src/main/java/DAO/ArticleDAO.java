@@ -15,6 +15,37 @@ public class ArticleDAO extends DAO {
         this.tableName = tableName;
     }
 
+    public void create(ArticleBean articleBean) {
+        final String QUERY = String.format("INSERT INTO %s (title, min_content, content, category_id, image) VALUES(?, ?, ?, ?, ?)", tableName);
+
+        Connection connection = null;
+
+        try {
+            connection = getConnection();
+        } catch (DAOException ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(QUERY);
+
+            preparedStatement.setString(1, articleBean.getTitle());
+            preparedStatement.setString(2, articleBean.getMinContent());
+            preparedStatement.setString(3, articleBean.getContent());
+            preparedStatement.setInt(4, articleBean.getCategoryId());
+            preparedStatement.setString(5, articleBean.getImage());
+
+            int count = preparedStatement.executeUpdate();
+
+            preparedStatement.close();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        releaseConnection(connection);
+    }
+
     public ArticleBean read(int id) {
         final String QUERY = String.format("SELECT * FROM %s WHERE id = ?", tableName);
 
