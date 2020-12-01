@@ -108,6 +108,29 @@ public class CategoryDAO extends DAO {
         return categories;
     }
 
+    public void delete(int id) {
+        final String QUERY = String.format("DELETE FROM %s WHERE id = ?", tableName);
+
+        Connection connection = null;
+
+        try {
+            connection = getConnection();
+        } catch (DAOException ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(QUERY);
+            preparedStatement.setInt(1, id);
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        releaseConnection(connection);
+    }
+
     private CategoryBean createCategoryBean(ResultSet resultSet) {
         CategoryBean categoryBean = new CategoryBean();
 

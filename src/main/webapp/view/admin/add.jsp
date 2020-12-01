@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 
@@ -43,9 +44,15 @@
                             <label>Content:</label>
                             <textarea name="content" class="form-control" rows="5" placeholder="Enter article content" required></textarea>
                         </div>
-                        <div class="form-group">
-                            <label>Category ID: </label>
-                            <input type="number" name="categoryId" class="form-control" placeholder="Enter category ID" required>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text" for="inputGroupSelect01">Category</label>
+                            </div>
+                            <select class="custom-select" name="categoryId" id="inputGroupSelect01">
+                                <c:forEach var="category" items="${ requestScope.categories }" >--%>
+                                    <option value="${ category.id }">${ category.title }</option>
+                                </c:forEach>
+                            </select>
                         </div>
                         <div class="form-group">
                             <label>Image:</label>

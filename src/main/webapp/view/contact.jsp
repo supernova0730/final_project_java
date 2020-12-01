@@ -61,11 +61,6 @@
                                                         <input name="email" type="text" id="email" placeholder="Your email" required="">
                                                     </fieldset>
                                                 </div>
-                                                <div class="col-md-12 col-sm-12">
-                                                    <fieldset>
-                                                        <input name="subject" type="text" id="subject" placeholder="Subject">
-                                                    </fieldset>
-                                                </div>
                                                 <div class="col-lg-12">
                                                     <fieldset>
                                                         <textarea name="message" rows="6" id="message" placeholder="Your Message" required=""></textarea>

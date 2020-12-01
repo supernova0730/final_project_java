@@ -22,18 +22,20 @@
                     <table class="table table-sm table-bordered table-striped table-dark">
                         <thead>
                         <tr>
+                            <th scope="col">#</th>
                             <th scope="col">id</th>
                             <th scope="col">Title</th>
                             <th scope="col" class="text-center">Action</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <c:forEach var="category" items="${ requestScope.categories }" >
+                        <c:forEach var="category" items="${ requestScope.categories }" varStatus="status">
                             <tr>
+                                <th scope="row">${ status.count }</th>
                                 <th scope="row">${ category.id }</th>
                                 <td>${ category.title }</td>
                                 <td class="text-center">
-                                    <a href="#" class="btn btn-sm btn-danger">Remove</a>
+                                    <a href="deleteCategory.do?id=${ category.id }" class="btn btn-sm btn-danger">Remove</a>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -48,6 +50,7 @@
                     <table class="table table-bordered table-striped table-dark">
                         <thead>
                         <tr>
+                            <th scope="col">#</th>
                             <th scope="col">id</th>
                             <th scope="col">Title</th>
                             <th scope="col">Category ID</th>
@@ -55,13 +58,14 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <c:forEach var="article" items="${ requestScope.articles }" >
+                        <c:forEach var="article" items="${ requestScope.articles }" varStatus="status">
                             <tr>
+                                <th scope="row">${ status.count }</th>
                                 <th scope="row">${ article.id }</th>
                                 <td><a href="detail.do?id=${ article.id }">${ article.title }</a></td>
                                 <td>${ article.categoryId }</td>
                                 <td class="text-center">
-                                    <a href="#" class="btn btn-sm btn-danger">Remove</a>
+                                    <a href="deleteArticle.do?id=${ article.id }" class="btn btn-sm btn-danger">Remove</a>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -76,6 +80,7 @@
                     <table class="table table-bordered table-striped table-dark">
                         <thead>
                         <tr>
+                            <th scope="col">#</th>
                             <th scope="col">id</th>
                             <th scope="col">Author Name</th>
                             <th scope="col">Content</th>
@@ -84,8 +89,9 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <c:forEach var="comment" items="${ requestScope.comments }" >
+                        <c:forEach var="comment" items="${ requestScope.comments }" varStatus="status">
                             <tr>
+                                <th scope="row">${ status.count }</th>
                                 <th scope="row">${ comment.id }</th>
                                 <td>${ comment.authorName }</td>
                                 <td>
@@ -93,8 +99,32 @@
                                 </td>
                                 <td>${ comment.articleId }</td>
                                 <td class="text-center">
-                                    <a href="#" class="btn btn-sm btn-danger">Remove</a>
+                                    <a href="deleteComment.do?id=${ comment.id }" class="btn btn-sm btn-danger">Remove</a>
                                 </td>
+                            </tr>
+                        </c:forEach>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="row mb-5">
+                <div class="col">
+                    <h2 class="mb-3">Admin Table</h2>
+                    <table class="table table-bordered table-striped table-dark">
+                        <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">id</th>
+                            <th scope="col">Username</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <c:forEach var="user" items="${ requestScope.users }" varStatus="status">
+                            <tr>
+                                <th scope="row">${ status.count }</th>
+                                <th scope="row">${ user.id }</th>
+                                <td>${ user.username }</td>
                             </tr>
                         </c:forEach>
                         </tbody>

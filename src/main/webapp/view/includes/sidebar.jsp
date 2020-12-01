@@ -10,7 +10,7 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="sidebar-item search">
-                <form id="search_form" name="gs" method="GET" action="#">
+                <form id="search_form" name="gs" method="GET" action="search.do">
                     <input type="text" name="q" class="searchText" placeholder="type to search..." autocomplete="on">
                 </form>
             </div>
@@ -55,7 +55,7 @@
                         %>
 
                         <% for (CategoryBean category: categories) { %>
-                            <li><a href="#">- <%= category.getTitle() %></a></li>
+                            <li><a href="category.do?categoryId=<%= category.getId() %>">- <%= category.getTitle() %></a></li>
                         <% } %>
                     </ul>
                 </div>

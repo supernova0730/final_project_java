@@ -26,8 +26,8 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="text-content">
-                            <h4>Post Details</h4>
-                            <h2>Single blog post</h2>
+                            <h4>${ requestScope.category.title }</h4>
+                            <h2>${ requestScope.article.title }</h2>
                         </div>
                     </div>
                 </div>
@@ -111,11 +111,12 @@
                                         <h2>Your comment</h2>
                                     </div>
                                     <div class="content">
-                                        <form id="comment" action="#" method="post">
+                                        <form id="comment" action="comment.do" method="post">
                                             <div class="row">
+                                                <input type="hidden" name="articleId" value="${ requestScope.article.id }">
                                                 <div class="col-md-6 col-sm-12">
                                                     <fieldset>
-                                                        <input name="name" type="text" id="name" placeholder="Your name" required="">
+                                                        <input name="authorName" type="text" id="name" placeholder="Your name" required="">
                                                     </fieldset>
                                                 </div>
                                                 <div class="col-md-6 col-sm-12">
@@ -125,7 +126,7 @@
                                                 </div>
                                                 <div class="col-lg-12">
                                                     <fieldset>
-                                                        <textarea name="message" rows="6" id="message" placeholder="Type your comment" required=""></textarea>
+                                                        <textarea name="content" rows="6" id="message" placeholder="Type your comment" required=""></textarea>
                                                     </fieldset>
                                                 </div>
                                                 <div class="col-lg-12">

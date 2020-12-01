@@ -23,17 +23,24 @@ public class Controller extends HttpServlet {
         ServletContext context = getServletContext();
         context.setAttribute("model", model);
 
-        Action.add(new HomeAction(model));
         Action.add(new BlogAction(model));
         Action.add(new DetailAction(model));
         Action.add(new AboutAction());
         Action.add(new ContactAction());
+        Action.add(new CommentAction(model));
+        Action.add(new CategoryAction(model));
+        Action.add(new SearchAction(model));
 
-        Action.add(new AdminLoginAction());
         Action.add(new AdminListAction(model));
-        Action.add(new AdminAddAction());
+        Action.add(new AdminAddAction(model));
         Action.add(new CategoryAddAction(model));
         Action.add(new ArticleAddAction(model));
+        Action.add(new CategoryDeleteAction(model));
+        Action.add(new ArticleDeleteAction(model));
+        Action.add(new CommentDeleteAction(model));
+        Action.add(new RegisterAction(model));
+        Action.add(new LoginAction(model));
+        Action.add(new LogoutAction());
     }
 
     @Override
@@ -77,6 +84,11 @@ public class Controller extends HttpServlet {
         }
 
         if (nextPage.endsWith(".do")) {
+            response.sendRedirect(nextPage);
+            return;
+        }
+
+        if (nextPage.contains(".do?")) {
             response.sendRedirect(nextPage);
             return;
         }

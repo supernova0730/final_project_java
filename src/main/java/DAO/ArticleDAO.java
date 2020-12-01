@@ -89,6 +89,83 @@ public class ArticleDAO extends DAO {
         return getArticlesByQuery(QUERY);
     }
 
+    public List<ArticleBean> getArticlesByCategoryID(int categoryId) {
+        final String QUERY = String.format("SELECT * FROM %s WHERE category_id = ?", tableName);
+
+        List<ArticleBean> articles = null;
+
+        Connection connection = null;
+
+        try {
+            connection = getConnection();
+        } catch (DAOException ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(QUERY);
+            preparedStatement.setInt(1, categoryId);
+            articles = getArticlesByPreparedQuery(preparedStatement);
+
+            preparedStatement.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        releaseConnection(connection);
+
+        return articles;
+
+    }
+
+    public List<ArticleBean> getArticlesBySearch(String content) {
+        final String QUERY = "SELECT * FROM " + tableName + " WHERE title LIKE '%" + content + "%'";
+        List<ArticleBean> articles = getArticlesByQuery(QUERY);
+        return articles;
+    }
+
+    public void delete(int id) {
+        final String QUERY = String.format("DELETE FROM %s WHERE id = ?", tableName);
+
+        Connection connection = null;
+
+        try {
+            connection = getConnection();
+        } catch (DAOException ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(QUERY);
+            preparedStatement.setInt(1, id);
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        releaseConnection(connection);
+    }
+
+    private List<ArticleBean> getArticlesByPreparedQuery(PreparedStatement preparedStatement) {
+        List<ArticleBean> articles = new ArrayList<>();
+
+        try {
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                ArticleBean article = createArticleBean(resultSet);
+                articles.add(article);
+            }
+
+            preparedStatement.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return articles;
+    }
+
     private List<ArticleBean> getArticlesByQuery(String query) {
         List<ArticleBean> articles = new ArrayList<>();
 

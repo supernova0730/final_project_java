@@ -15,6 +15,34 @@ public class CommentDAO extends DAO {
         this.tableName = tableName;
     }
 
+    public void create(CommentBean commentBean) {
+        final String QUERY = String.format("INSERT INTO %s (author_name, email, content, article_id) VALUES(?, ?, ?, ?)", tableName);
+
+        Connection connection = null;
+
+        try {
+            connection = getConnection();
+        } catch (DAOException ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(QUERY);
+
+            preparedStatement.setString(1, commentBean.getAuthorName());
+            preparedStatement.setString(2, commentBean.getEmail());
+            preparedStatement.setString(3, commentBean.getContent());
+            preparedStatement.setInt(4, commentBean.getArticleId());
+
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        releaseConnection(connection);
+    }
+
     public List<CommentBean> getAllComments() {
         final String QUERY = String.format("SELECT * FROM %s", tableName);
 
@@ -80,6 +108,29 @@ public class CommentDAO extends DAO {
         releaseConnection(connection);
 
         return comments;
+    }
+
+    public void delete(int id) {
+        final String QUERY = String.format("DELETE FROM %s WHERE id = ?", tableName);
+
+        Connection connection = null;
+
+        try {
+            connection = getConnection();
+        } catch (DAOException ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(QUERY);
+            preparedStatement.setInt(1, id);
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        releaseConnection(connection);
     }
 
     private CommentBean createCommentBean(ResultSet resultSet) {

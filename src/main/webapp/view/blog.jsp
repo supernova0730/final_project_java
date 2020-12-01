@@ -20,19 +20,29 @@
 <body>
     <jsp:include page="includes/header.jsp" />
 
-    <div class="heading-page header-text">
-        <section class="page-heading">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="text-content">
-                            <h4>Recent Posts</h4>
-                            <h2>Our Recent Blog Entries</h2>
+    <div class="main-banner header-text">
+        <div class="container-fluid">
+            <div class="owl-banner owl-carousel">
+                <c:forEach var="article" items="${ requestScope.articles }">
+                    <div class="item">
+                        <img src="${ pageContext.request.contextPath }/image/${ article.articleBean.image }" alt="">
+                        <div class="item-content">
+                            <div class="main-content">
+                                <div class="meta-category">
+                                    <span>${ article.categoryName }</span>
+                                </div>
+                                <a href="detail.do?id=${ article.articleBean.id }"><h4>${ article.articleBean.title }</h4></a>
+                                <ul class="post-info">
+                                    <fmt:setLocale value="en_US"/>
+                                    <li><a href="#"><fmt:formatDate pattern="MMMM d, y" value="${ article.articleBean.dateCreated }"/></a></li>
+                                    <li><a href="#">${ article.numberOfComments } Comments</a></li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </c:forEach>
             </div>
-        </section>
+        </div>
     </div>
 
     <section class="blog-posts grid-system">
@@ -73,14 +83,14 @@
                                     </div>
                                 </div>
                             </c:forEach>
-                            <div class="col-lg-12">
-                                <ul class="page-numbers">
-                                    <li class="active"><a href="#">1</a></li>
-                                    <li><a href="#">2</a></li>
-                                    <li><a href="#">3</a></li>
-                                    <li><a href="#"><i class="fa fa-angle-double-right"></i></a></li>
-                                </ul>
-                            </div>
+<%--                            <div class="col-lg-12">--%>
+<%--                                <ul class="page-numbers">--%>
+<%--                                    <li class="active"><a href="#">1</a></li>--%>
+<%--                                    <li><a href="#">2</a></li>--%>
+<%--                                    <li><a href="#">3</a></li>--%>
+<%--                                    <li><a href="#"><i class="fa fa-angle-double-right"></i></a></li>--%>
+<%--                                </ul>--%>
+<%--                            </div>--%>
                         </div>
                     </div>
                 </div>

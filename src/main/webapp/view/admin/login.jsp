@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -9,13 +10,22 @@
 </head>
 <body>
     <div class="login-form">
-        <form action="/examples/actions/confirmation.php" method="post">
+        <form action="login.do" method="POST">
             <h2 class="text-center">Welcome</h2>
+
+            <c:if test="${ requestScope.errors != null }">
+                <ul class="errors text-danger">
+                    <c:forEach var="error" items="${ requestScope.errors }" >
+                        <li>${ error }</li>
+                    </c:forEach>
+                </ul>
+            </c:if>
+
             <div class="form-group">
-                <input type="text" class="form-control" placeholder="Username" required="required">
+                <input type="text" name="username" class="form-control" placeholder="Username" required="required">
             </div>
             <div class="form-group">
-                <input type="password" class="form-control" placeholder="Password" required="required">
+                <input type="password" name="password" class="form-control" placeholder="Password" required="required">
             </div>
             <div class="form-group">
                 <button type="submit" class="btn btn-primary btn-block">Sign in</button>

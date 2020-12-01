@@ -51,6 +51,11 @@ public class ArticleForm {
             return errors;
         }
 
+        if (categoryId == null || content.length() == 0) {
+            errors.add("Category id is reqiured");
+            return errors;
+        }
+
         try {
             Integer.parseInt(categoryId);
         } catch (NumberFormatException ex) {
